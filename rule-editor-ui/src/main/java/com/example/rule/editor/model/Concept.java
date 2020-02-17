@@ -1,5 +1,8 @@
 package com.example.rule.editor.model;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
+
 public class Concept {
 
     private final ConceptDef conceptDef;
@@ -15,13 +18,13 @@ public class Concept {
         this.conceptData = builder.getConceptData().copy();
     }
 
-    public Object getAttribute(String name) {
-        int attributeIndex = conceptDef.getAttributeIndex(name);
-        return conceptData.getAttribute(attributeIndex);
+    public ConceptDef getConceptDef() {
+        return conceptDef;
     }
 
-    public void setAttribute(String name, Object value) {
+    public Property<Object> getAttributeProperty(String name) {
         int attributeIndex = conceptDef.getAttributeIndex(name);
-        conceptData.setAttribute(attributeIndex, value);
+        return new SimpleObjectProperty<>(conceptData.getAttribute(attributeIndex));
     }
+
 }

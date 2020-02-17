@@ -14,7 +14,7 @@ public class RuleRepository {
     private ConceptDef getIssuerConcept() {
         return new ConceptDefBuilder().
                 name("Issuer").
-                attribute(new AttributeDef("Name", String.class)).
+                attribute(new AttributeDef("IssuerName", String.class)).
                 attribute(new AttributeDef("IssuerCountry", String.class)).
                 build();
     }
@@ -29,43 +29,46 @@ public class RuleRepository {
     }
 
 
-    public List<Concept> getProducts() {
+    public List<ProductData> getProducts() {
         return List.of(
-                new ConceptBuilder(getProductConcept()).
-                        attribute("MarketSector", "FI").
-                        attribute("SecuityTypeLevel1", "OPTION").
-                        attribute("Country", "US").
-                        build(),
-                new ConceptBuilder(getProductConcept()).
-                        attribute("MarketSector", "FI").
-                        attribute("SecuityTypeLevel1", "OPTION").
-                        attribute("Country", "US").
-                        build(),
-
-
                 new ProductData(
-                        new ProductBuilder().
-                                marketSector("FI").
-                                secuityTypeLevel1("OPTION").
-                                country("US").
-                                build(),
-                        new FactorInformation(BigDecimal.valueOf(10.9))
+                        List.of(
+                                new ConceptBuilder(getProductConcept()).
+                                        attribute("MarketSector", "FI").
+                                        attribute("SecurityTypeLevel1", "OPTION").
+                                        attribute("Country", "US").
+                                        build(),
+                                new ConceptBuilder(getIssuerConcept()).
+                                        attribute("IssuerName", "JP").
+                                        attribute("IssuerCountry", "US").
+                                        build()
+                        )
                 ),
                 new ProductData(
-                        new ProductBuilder().
-                                marketSector("SPREAD").
-                                secuityTypeLevel1("CONTRACT").
-                                country("PL").
-                                build(),
-                        new FactorInformation(BigDecimal.valueOf(12.1))
+                        List.of(
+                                new ConceptBuilder(getProductConcept()).
+                                        attribute("MarketSector", "SPREAD").
+                                        attribute("SecurityTypeLevel1", "CONTRACT").
+                                        attribute("Country", "PL").
+                                        build(),
+                                new ConceptBuilder(getIssuerConcept()).
+                                        attribute("IssuerName", "JP").
+                                        attribute("IssuerCountry", "US").
+                                        build()
+                        )
                 ),
                 new ProductData(
-                        new ProductBuilder().
-                                marketSector("TREASUES").
-                                secuityTypeLevel1("FUTURE").
-                                country("UK").
-                                build(),
-                        new FactorInformation(BigDecimal.valueOf(250.4))
+                        List.of(
+                                new ConceptBuilder(getProductConcept()).
+                                        attribute("MarketSector", "TREASUES").
+                                        attribute("SecurityTypeLevel1", "FUTURE").
+                                        attribute("Country", "UK").
+                                        build(),
+                                new ConceptBuilder(getIssuerConcept()).
+                                        attribute("IssuerName", "JP").
+                                        attribute("IssuerCountry", "US").
+                                        build()
+                        )
                 )
         );
     }
